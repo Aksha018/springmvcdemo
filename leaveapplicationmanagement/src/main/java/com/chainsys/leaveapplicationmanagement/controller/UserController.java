@@ -1,5 +1,6 @@
 package com.chainsys.leaveapplicationmanagement.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,9 +86,10 @@ public class UserController {
  }
  @GetMapping("/findbyid")
  public String findbyuserid(@RequestParam("id") int id,Model model) {
-	
 	 User userid =userDao.findByUserId(id);
-	  model.addAttribute(userid);
+	 List<User> userList =new ArrayList<>();
+	 userList.add(userid);
+	  model.addAttribute(userList);
 	  return "/list-user.jsp";
  }
  }

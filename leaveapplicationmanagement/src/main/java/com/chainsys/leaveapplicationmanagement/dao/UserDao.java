@@ -13,7 +13,7 @@ import com.chainsys.leaveapplicationmanagement.model.User;
 public class UserDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
+	                            
 // Insert
 	public int addUser(User user) {
 		String q = "insert into user1(id,name,email,password) values (?,?,?,?)";
