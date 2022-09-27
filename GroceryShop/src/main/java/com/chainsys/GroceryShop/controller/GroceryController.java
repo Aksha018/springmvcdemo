@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chainsys.GroceryShop.dao.GroceryDao;
 import com.chainsys.GroceryShop.model.Grocery;
 import com.chainsys.GroceryShop.validation.GroceryValidation;
+import com.chainsys.GroceryShop.validation.UserValidation;
 
 @Controller
 @RequestMapping("/grocery")
@@ -22,6 +23,8 @@ public class GroceryController {
 	GroceryDao groceryDao;
 	@Autowired
 	GroceryValidation groceryValidation;
+	@Autowired
+	UserValidation userValidation;
 	
 	@GetMapping("/addProduct")
 	public String add() {
@@ -34,7 +37,7 @@ public class GroceryController {
 			if(groceryValidation.checkProductname(productName)) {
 			if(groceryValidation.checkQuantity(quantity)) {
 			if(groceryValidation.checkPrice(price)) {
-			if(groceryValidation.checkUserId(userId)) {	
+			if(userValidation.checkUserId(userId)) {	
 			Grocery grocery = new Grocery();
 			grocery.setProductId(productId);
 			grocery.setProductName(productName);
@@ -118,12 +121,11 @@ public class GroceryController {
        
       @GetMapping("findbyid") 
       public String findIdProduct(@RequestParam("productId")int productId,Model model) {
-    	  
-    	  Grocery findIdByProduct = groceryDao.finfByProductId(productId);
+    	  Grocery findIdByProduct = groceryDao.findByProductId(productId);
     	  List<Grocery> groceryList = new ArrayList<>();
     	  groceryList.add(findIdByProduct);
     	  model.addAttribute("groceryList", groceryList);
     	  return "/grocery-list.jsp";
-    	
+    	  
       }
 }

@@ -4,23 +4,31 @@ package com.chainsys.GroceryShop.validation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.chainsys.GroceryShop.dao.UserDao;
+import com.chainsys.GroceryShop.model.User;
 
 @Repository
 public class UserValidation {
 	
 	
 	public boolean checkUserId(int userId) {
-	if((userId<=0)) {
-		return false;
-	}
-	else {
-		return true;
-	}
+		if(userId<=0) {
+			return false;
 		}
+		else {
+			return true;
+		}
+			}
+	public boolean checkUser(User user) {
+		if(user==null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+			}
+		
 	
 	public boolean checkUsername(String name){
 		  

@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.GroceryShop.Exception.UserException;
 import com.chainsys.GroceryShop.mapper.GroceryMapper;
 import com.chainsys.GroceryShop.model.Grocery;
+import com.chainsys.GroceryShop.validation.GroceryValidation;
 
 @Repository
 public class GroceryDao {
   @Autowired
   JdbcTemplate jdbcTemplate;
+  @Autowired
+  GroceryValidation groceryValidation;
   
  //Insert 
   
@@ -50,15 +54,20 @@ public class GroceryDao {
     	return product;
     }
  //FindByProductId
-    public Grocery finfByProductId(int productId) {
+    public Grocery findByProductId(int productId) {
     	try {
+    	if(groceryValidation.checkProductId(productId)) {
+  		  throw new UserException("Invalid Id");
+  	  }
     	String q = "select PRODUCT_ID,PRODUCT_NAME,QUNATITY,PRICE,USER_ID from PRODUCTS where PRODUCT_ID=?";
-    	Grocery finfByProductId = null;
-    	finfByProductId = jdbcTemplate.queryForObject(q, new GroceryMapper(),productId);
-    	return finfByProductId;
-    	}catch(Exception e) {
+    	Grocery findByProductId = null;
+    	findByProductId = jdbcTemplate.queryForObject(q, new GroceryMapper(),productId);
+    	return findByProductId;
+    	}
+    	catch(UserException e) {
     		return null;
     	}
+    	
     }
     
     

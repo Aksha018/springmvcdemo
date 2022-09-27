@@ -6,14 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.chainsys.GroceryShop.Exception.UserException;
 import com.chainsys.GroceryShop.mapper.UserMapper;
 import com.chainsys.GroceryShop.model.User;
+import com.chainsys.GroceryShop.validation.GroceryValidation;
+import com.chainsys.GroceryShop.validation.UserValidation;
 
 @Repository
 public class UserDao {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	@Autowired
+	UserValidation userValidation;
 	
 // Insert 
 	
@@ -49,15 +54,20 @@ public class UserDao {
 		return details;
 	}
 //FindByUserId
-	public User findByUserId(int userId) {
-		try {
+	public User findByUserId(int userId) throws UserException {
+		
+		if(!userValidation.checkUserId(userId)) {
+			throw new UserException("Invalid userId or id should be greater than 0");
+		}
+		
 		String select = "select USER_ID,NAME,PASSWORD,MOBILE_NO from USERDETAILS where USER_ID=?";
 		User findById = null;
 		findById = jdbcTemplate.queryForObject(select, new UserMapper(),userId);
-		return findById;
-		}catch(Exception e) {
-			return null;
+		if(!userValidation.checkUser(findById)) {
+			throw new UserException("Data not found");
 		}
+		return findById;
+	
 	}
 	
 

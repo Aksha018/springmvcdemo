@@ -16,16 +16,6 @@ public class GroceryValidation {
 	@Autowired
 	UserDao userDao;
 	
-	public boolean checkProductId(int productId) {
-		
-		 if((productId<=0)) {
-			return false;
-		}
-		else {
-			return true;
-		}
-		
-	}
 	public boolean checkProductname(String productName){
 		  
         String regex = "^[a-z A-Z]+$";
@@ -55,9 +45,16 @@ public boolean checkPrice(int price) {
 			return true;
 		}
 	}
-public boolean checkUserId(int userId) {
-	User findByUserId = userDao.findByUserId(userId);
-	if((findByUserId==null)&&(userId<=0)) {
+public boolean checkProductId(int productId) {
+	if(productId<=0) {
+		return false;
+	}
+	else {
+		return true;
+	}
+		}
+public boolean checkUser(User user) {
+	if(user==null) {
 		return false;
 	}
 	else {

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.GroceryShop.Exception.UserException;
 import com.chainsys.GroceryShop.dao.UserDao;
 import com.chainsys.GroceryShop.model.User;
 import com.chainsys.GroceryShop.validation.UserValidation;
@@ -116,11 +117,17 @@ UserValidation userValidation;
 
 	@GetMapping("findbyuserid")
 	public String findById(@RequestParam("userId") int userId, Model model) {
-		User findByUserId = userDao.findByUserId(userId);
-		List<User> listUser = new ArrayList<User>();
-		listUser.add(findByUserId);
-		model.addAttribute("listUser",listUser);
-		return "/list-user.jsp";
+		User findByUserId;
+		try {
+			findByUserId = userDao.findByUserId(userId);
+			List<User> listUser = new ArrayList<User>();
+			listUser.add(findByUserId);
+			model.addAttribute("listUser",listUser);
+			return "/list-user.jsp";
+		} catch (UserException e) {
+			return null;
+		}
+		
 	}
 
 }
