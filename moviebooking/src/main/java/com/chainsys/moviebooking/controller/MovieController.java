@@ -95,6 +95,8 @@ public String updateMovieDetails(@RequestParam("movieId")int movieId,@RequestPar
 		List<Movie> movieList = movieDao.listMovie();
 		 model.addAttribute("movieList", movieList);
 		 return "/movie-list.jsp";
+		 
+		 
 	 }else {
 				String addPrice = "Please enter valid number";
 				model.addAttribute("check", addPrice);
@@ -125,13 +127,15 @@ public String updateMovieDetails(@RequestParam("movieId")int movieId,@RequestPar
 
 
 @GetMapping("/findbyid")
-public String findById() {
+public String findById(@RequestParam("id") int movieId,Model model) {
+	model.addAttribute("movieId", movieId);
 	return "/find-movie-details-byid.jsp";
 }
 @GetMapping("find")
 public String findMovieDetailsById(@RequestParam("movieId")int movieId, Model model) {
 	Movie findMovieDetailsById;
 	try {
+		System.out.println("id"+movieId);
 	Movie movieid = movieDao.findByMovieId(movieId);
 	List<Movie> movieList = new ArrayList<>();
 	movieList.add(movieid);

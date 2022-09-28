@@ -11,7 +11,7 @@
 <form action = "find" method="get">
 <table>
 <tr><td>MovieId:</td>
-<td><input type="text" name="movieId"/></td></tr>
+<td><input type="text" name="movieId" value="${movieId}" readonly/></td></tr>
 <tr><td colspan="2"><input type="submit" value="Find"/></td></tr>
 </table>
 </form>

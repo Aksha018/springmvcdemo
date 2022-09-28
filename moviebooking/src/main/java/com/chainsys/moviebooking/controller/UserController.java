@@ -48,6 +48,8 @@ public class UserController {
         	 List<Movie> movieList = movieDao.listMovie();
     		 model.addAttribute("listMovie", movieList);
     		 return "/user-movie-list.jsp";
+    		 
+    		 
     	}else {
     		String addPassword = "Please enter valid password";
     		model.addAttribute("check", addPassword);

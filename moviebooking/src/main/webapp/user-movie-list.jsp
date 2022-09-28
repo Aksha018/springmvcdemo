@@ -29,7 +29,7 @@
 						<td>${movie.movieName}</td>
 						<td>${movie.movieDate}</td>
 						<td>${movie.price}</td>
-						 <td><a href="/movie/findbyid?"id="${movieId}"><button>Book</button></a>
+						 <td><a href="/movie/findbyid?id=${movie.movieId}"><button>Book</button></a>
 					</tr>
 				</c:forEach>
 			</tbody>
