@@ -6,9 +6,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.chainsys.GroceryShop.dao.GroceryDao;
 import com.chainsys.GroceryShop.dao.UserDao;
-import com.chainsys.GroceryShop.model.Grocery;
 import com.chainsys.GroceryShop.model.User;
 
 @Repository
@@ -61,8 +59,5 @@ public boolean checkUser(User user) {
 		return true;
 	}
 		}
-	
-	
-	
 
 }
