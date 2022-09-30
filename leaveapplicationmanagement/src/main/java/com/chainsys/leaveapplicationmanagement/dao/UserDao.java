@@ -1,6 +1,12 @@
 package com.chainsys.leaveapplicationmanagement.dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,7 +34,9 @@ public class UserDao {
 		String select = "select id,name,email,password from user1";
 		 List<User> listUser = null;
 		 listUser = jdbcTemplate.query(select,new UserMapper());
-		 return listUser;
+/*lambda*/   listUser.forEach((i) -> {
+	    		System.out.println(i);});
+		   return listUser;
 		
 	}
 //Update
@@ -48,11 +56,38 @@ public class UserDao {
 	}
 //FindById	
 public User findByUserId(int id ) {
-
+		
 		String select = "select id,name,email,password from user1 where id=?";
 		 User findById = null;
 		 findById = jdbcTemplate.queryForObject(select,new UserMapper(),id);
 		 return findById;
 		
 	}
-}
+//streams(map)
+	public void listId(){
+		List<Integer> id = new ArrayList<Integer>();
+		id.add(101);
+		id.add(111);
+		id.add(112);
+		 List<User> listUser = null;
+		 listUser = id.stream().map(userid -> findByUserId(userid)).collect(Collectors.toList());
+		 listUser.forEach((i) -> {
+	    		System.out.println(i);});
+	}
+//streams(filter,sort)
+	public void  listName() {
+		List<String> names = new ArrayList<String>();
+    	names.add("Aksh");
+    	names.add("Gowri");
+    	names.add("Roobala");
+   //Using Stream and Lambda expression
+    	long count = names.stream().filter(str->str.length()<5).count();
+            System.out.println(count+" strings with length less than 5");
+        Collections.sort(names);
+        names.forEach((i) -> {
+    		System.out.println(i);});
+    }  
+
+	}
+	
+

@@ -90,6 +90,8 @@ public class UserController {
 	 List<User> userList =new ArrayList<>();
 	 userList.add(userid);
 	  model.addAttribute(userList);
+	  userDao.listId();
+	  userDao.listName();
 	  return "/list-user.jsp";
  }
  }
