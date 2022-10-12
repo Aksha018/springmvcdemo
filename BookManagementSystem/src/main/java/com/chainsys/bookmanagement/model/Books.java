@@ -10,6 +10,8 @@ public class Books {
 	private int price;
 	private Date sellingDate;
 	private String publishingYear;
+	private byte[] bookImage;
+    private String imagesPath;
 	
 	public int getBookId() {
 		return bookId;
@@ -46,6 +48,18 @@ public class Books {
 	}
 	public void setPublishingYear(String publishingYear) {
 		this.publishingYear = publishingYear;
+	}
+	public byte[] getBookImage() {
+		return bookImage;
+	}
+	public void setBookImage(byte[] bookImage) {
+		this.bookImage = bookImage;
+	}
+	public String getImagesPath() {
+		return imagesPath;
+	}
+	public void setImagesPath(String imagesPath) {
+		this.imagesPath = imagesPath;
 	}
 	
 }

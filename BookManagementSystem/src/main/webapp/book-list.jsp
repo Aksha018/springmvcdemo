@@ -20,6 +20,7 @@
 					<th>Year of Publishing</th>
 					<th>Price</th>
 					<th>Selling Date</th>
+					<th>Book Image</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -32,6 +33,7 @@
 						<td>${book.publishingYear}</td>
 						<td>${book.price}</td>
 						<td>${book.sellingDate}</td>
+						<td>${book.bookImage}</td>
 						
 					</tr>
 				</c:forEach>

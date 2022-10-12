@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Add Books</title>
+<title>Update Books</title>
 </head>
 <body>
-<h1>Adding Book Details</h1>
-<form action ="add" method="post" enctype="multipart/form-data">
+<h1>Update Book Details</h1>
+<form action ="update" method="get">
 <table>
 <tr><td>Book Id:</td>
 <td><input type="text" name="bookId"/></td></tr>
@@ -22,10 +22,8 @@
 <td><input type="text" name="price"/></td></tr>
 <tr><td>Selling Date:</td>
 <td><input type="date" name="sellingDate"/></td></tr>
-<tr><td>Book Image:</td>
-<td><input type="file" name="bookImage" accept="images/png,images/jpeg,images/jpg"/></td></tr>
 
-<tr><td colspan="2"><input type="submit" value="Add"/></td></tr>
+<tr><td colspan="2"><input type="submit" value="Update"/></td></tr>
 </table>
 </form>
 </body>

@@ -3,6 +3,7 @@ package com.chainsys.bookmanagement.mapper;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 import org.springframework.jdbc.core.RowMapper;
 
@@ -18,7 +19,8 @@ import com.chainsys.bookmanagement.model.Books;
 			String publishingYear = rs.getString(4);
 			int price = rs.getInt(5);
 			Date sellingDate = rs.getDate(6);
-			
+			byte[] images = rs.getBytes("book_image");
+			String base64Image = Base64.getEncoder().encodeToString(images);
 			
 			Books book = new Books();
 			
@@ -28,6 +30,8 @@ import com.chainsys.bookmanagement.model.Books;
 			book.setPublishingYear(publishingYear);
 			book.setPrice(price);
 			book.setSellingDate(sellingDate);
+			book.setBookImage(images);
+	        book.setImagesPath(base64Image);
 			
 			return book;
 			
