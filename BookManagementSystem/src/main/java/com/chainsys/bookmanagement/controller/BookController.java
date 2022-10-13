@@ -38,11 +38,11 @@ public class BookController {
 	    
 	    @PostMapping("add")
 	    public String insertBook(@RequestParam(name = "bookId", required = true)int bookId,@RequestParam("bookName")String bookName,@RequestParam("author")String author,@RequestParam("publishingYear")String publishingYear,@RequestParam("price")int price,@RequestParam("sellingDate")String sellingDate,@RequestParam("file") MultipartFile image,Model model){
-	    	
-	    	//if(bookValidation.chechBookId(bookId)) {
-//	    	if(bookValidation.checkBookName(bookName)) {
-//	    		if(bookValidation.checkAuthor(author)) {
-//	    			if(bookValidation.checkPrice(price)) {
+
+	    	if(bookValidation.chechBookId(bookId)) {
+	    	if(bookValidation.checkBookName(bookName)) {
+	    		if(bookValidation.checkAuthor(author)) {
+	    			if(bookValidation.checkPrice(price)) {
 	    	
 	    	String path = "C:\\Users\\aksh3106\\eclipse-workspace\\BookManagementSystem\\src\\main\\webapp\\images";
 			String filename = image.getOriginalFilename();
@@ -65,6 +65,7 @@ public class BookController {
 	Date sellingDate1 = Date.valueOf(date);
 	
 		Books book = new Books();
+
 		book.setBookId(bookId);
 		book.setBookName(bookName);
 		book.setAuthor(author);
@@ -74,43 +75,46 @@ public class BookController {
 		book.setBookImage(images);
     	
 		int addBooks = bookDao.addBooks(book);
-       
+
 		List<Books> bookList = bookDao.bookList();
 		 model.addAttribute("bookList", bookList);
 		 return "/book-list.jsp";
 		 
-//	}else {
-//		String addPrice = "Please enter valid number";
-//		model.addAttribute("check", addPrice);
-//		return "/add-book.jsp";
-//	}
-//		}else {
-//			String authorName = "Please Enter Alphabets only";
-//			model.addAttribute("check", authorName);
-//			return "/add-book.jsp";
-//		}
-//	}else {
-//		String addBookName = "Please Enter Alphabets only";
-//		model.addAttribute("check", addBookName);
-//		return "/add-book.jsp";
-//		
-//	}
-//}else {
-//	String addBookId ="Please enter valid id";
-//	model.addAttribute("check", addBookId);
-//	return "/add-book.jsp";
-//}	
+	}else {
+		String addPrice = "Please enter valid number";
+		model.addAttribute("check", addPrice);
+		return "/add-book.jsp";
+	}
+		}else {
+			String authorName = "Please Enter Alphabets only";
+			model.addAttribute("check", authorName);
+			return "/add-book.jsp";
+		}
+	}else {
+		String addBookName = "Please Enter Alphabets only";
+		model.addAttribute("check", addBookName);
+		return "/add-book.jsp";
+		
+	}
+}else {
+	String addBookId ="Please enter valid id";
+	model.addAttribute("check", addBookId);
+	return "/add-book.jsp";
+}	
 		 
 }
-			
-	    
+			    
 	    @GetMapping("/updatebookdetails")
 		public String updatebook() {
 			return "/update-book.jsp";
 		}
 	    @GetMapping("update")
 	    public String updateBook(@RequestParam("bookId")int bookId,@RequestParam("bookName")String bookName,@RequestParam("author")String author,@RequestParam("publishingYear")String publishingYear,@RequestParam("price")int price,@RequestParam("sellingDate")String sellingDate,Model model){
-	    
+	    	if(bookValidation.chechBookId(bookId)) {
+	    	if(bookValidation.checkBookName(bookName)) {
+	    		if(bookValidation.checkAuthor(author)) {
+	    			if(bookValidation.checkPrice(price)) {
+	    	
 	    	LocalDate date = LocalDate.parse(sellingDate);
 			Date sellingDate1 = Date.valueOf(date);
 			
@@ -128,6 +132,28 @@ public class BookController {
 	    		List<Books> bookList = bookDao.bookList();
 	    		 model.addAttribute("bookList", bookList);
 	    		 return "/book-list.jsp";
+	    			}else {
+	    			String addPrice = "Please enter valid number";
+	    			model.addAttribute("check", addPrice);
+	    			return "/update-book.jsp";
+	    		}
+	    			}else {
+	    				String authorName = "Please Enter Alphabets only";
+	    				model.addAttribute("check", authorName);
+	    				return "/update-book.jsp";
+	    			}
+	    		}else {
+	    			String addBookName = "Please Enter Alphabets only";
+	    			model.addAttribute("check", addBookName);
+	    			return "/update-book.jsp";
+	    			
+	    		}
+	    	}else {
+	    		String addBookId ="Please enter valid id";
+	    		model.addAttribute("check", addBookId);
+	    		return "/update-book.jsp";
+	    	}	
+	    			 
 	    }
 	    
 	    @GetMapping("deletebookdetails")
@@ -136,10 +162,16 @@ public class BookController {
 	    }
 	    @GetMapping("delete")
 	    public String deleteBook(@RequestParam("bookId")int bookId,Model model) {
+	    if(bookValidation.chechBookId(bookId)) {
 	    	int deletebook = bookDao.deleteBooks(bookId);
 	    	List<Books> bookList = bookDao.bookList();
    		 model.addAttribute("bookList", bookList);
    		 return "/book-list.jsp";
+   		}else {
+   			String addBookId ="Please enter valid id";
+   			model.addAttribute("check", addBookId);
+   			return "/delete-book.jsp";
+   		}	
 	    }   	
 	    
 	    @GetMapping("/findBybookId")
