@@ -37,7 +37,7 @@ public class BookController {
 		}
 	    
 	    @PostMapping("add")
-	    public String insertBook(@RequestParam("bookId")int bookId,@RequestParam("bookName")String bookName,@RequestParam("author")String author,@RequestParam("publishingYear")String publishingYear,@RequestParam("price")int price,@RequestParam("sellingDate")String sellingDate,@RequestParam("file") MultipartFile image,Model model){
+	    public String insertBook(@RequestParam(name = "bookId", required = true)int bookId,@RequestParam("bookName")String bookName,@RequestParam("author")String author,@RequestParam("publishingYear")String publishingYear,@RequestParam("price")int price,@RequestParam("sellingDate")String sellingDate,@RequestParam("file") MultipartFile image,Model model){
 	    	
 	    	//if(bookValidation.chechBookId(bookId)) {
 //	    	if(bookValidation.checkBookName(bookName)) {

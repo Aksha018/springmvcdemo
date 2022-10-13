@@ -19,7 +19,7 @@ import com.chainsys.bookmanagement.model.Books;
 			String publishingYear = rs.getString(4);
 			int price = rs.getInt(5);
 			Date sellingDate = rs.getDate(6);
-			byte[] images = rs.getBytes("book_image");
+			byte[] images = rs.getBytes("BOOK_IMAGE");
 			String base64Image = Base64.getEncoder().encodeToString(images);
 			
 			Books book = new Books();
